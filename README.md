@@ -1,345 +1,319 @@
-<<<<<<< HEAD
-# MediTwin AI - Digital Health Twin Backend API
+MediTwin AI - Digital Health Twin Backend API
 
-[![Python Version](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.111%2B-009688.svg)](https://fastapi.tiangolo.com/)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0%2B%20(Async)-red.svg)](https://www.sqlalchemy.org/)
-[![Pydantic](https://img.shields.io/badge/Pydantic-v2-e91e63.svg)](https://docs.pydantic.dev/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+Show Image
+Show Image
+Show Image
+Show Image
+Show Image
 
-MediTwin AI is a production-ready asynchronous backend API for a digital health twin platform. It provides deterministic health scoring across clinical cardiovascular, metabolic, and lifestyle domains, scenario-based digital twin simulations, and extensible hooks for Google Gemini AI integrations.
+MediTwin AI is a production-ready asynchronous backend API for a digital health twin platform. It provides deterministic health scoring across clinical cardiovascular, metabolic, and lifestyle domains, scenario-based digital twin simulations, and integrated Google Gemini AI services for personalized health insights.
 
----
+✨ Features
+Deterministic Health Scoring: Accurate cardiovascular, metabolic, and lifestyle domain assessments based on WHO/AHA/ADA standards
+Digital Twin Simulations: Scenario-based projections for health trajectories and outcome predictions
+AI-Powered Insights: Google Gemini integration for health summaries, predictions, recommendations, and conversational guidance
+Async Architecture: Production-ready with SQLAlchemy async ORM and FastAPI for high performance
+Clean Architecture: Decoupled layers following SOLID principles and separation of concerns
+Comprehensive REST API: RESTful endpoints with automatic OpenAPI documentation and Swagger UI
+Health Coach: Conversational AI assistant for personalized, context-aware health guidance
+Demo Profiles: 10 realistic sample profiles for testing and demonstrations
+🏛️ Architecture Overview
 
-## 🏛️ Project Architecture
+Built following Clean Architecture principles, separating concerns into decoupled layers for maintainability, testability, and scalability:
 
-Built following **Clean Architecture** principles, separating concerns into decoupled layers:
-
-```
-c:\Users\HP\MediTwin-AI\app\
-├── main.py                     # App factory, lifespan context, CORS & Middleware
+app/
+├── main.py                     # App factory, lifespan context, CORS & middleware
 ├── core/                       # Core infrastructure & system settings
 │   ├── config.py               # Centralized pydantic-settings configuration
-│   ├── database.py             # SQLAlchemy Async Engine & get_db session dependency
+│   ├── database.py             # SQLAlchemy async engine & dependency injection
 │   ├── init_db.py              # Startup DB schema creation
 │   ├── logging.py              # Structured logging configuration
-│   └── exceptions.py           # Custom AppException & global exception handlers
-├── models/                     # SQLAlchemy 2.x ORM Models
+│   └── exceptions.py           # Custom exceptions & global error handlers
+├── models/                     # SQLAlchemy 2.x ORM models
 │   ├── profile.py              # Patient profile & clinical biomarkers
 │   ├── score.py                # Computed health scores & domain ratings
 │   └── simulation.py           # Digital twin scenario projections
-├── schemas/                    # Pydantic v2 Validation & Response DTOs
+├── schemas/                    # Pydantic v2 validation & response DTOs
 │   ├── common.py               # Standardized APIResponse & ErrorResponse
 │   ├── profile.py              # Profile input & response schemas
-│   ├── score.py                # Score response schemas & breakdown
-│   └── simulation.py           # Simulation input & projection schemas
-├── domain/                     # Pure Deterministic Business Logic (Framework-independent)
+│   ├── score.py                # Score response schemas & breakdowns
+│   ├── simulation.py           # Simulation input & projection schemas
+│   └── ai_schemas.py           # AI service request/response schemas
+├── domain/                     # Pure business logic (framework-independent)
 │   ├── constants.py            # WHO/AHA/ADA clinical reference thresholds
-│   ├── health_engine.py        # Sub-score, domain score, and overall risk calculations
-│   └── simulation_engine.py    # Digital twin hypothetical scenario calculations
-├── repositories/               # Data Access Layer (Pure DB operations)
-│   ├── profile_repository.py
-│   ├── score_repository.py
-│   └── simulation_repository.py
-├── services/                   # Business Orchestration & Transaction Layer
-│   ├── profile_service.py
+│   ├── health_engine.py        # Sub-score, domain score, & risk calculations
+│   └── simulation_engine.py    # Digital twin scenario simulations
+├── repositories/               # Data access layer (pure DB operations)
+│   ├── profile_repository.py   # Patient profile data access
+│   ├── score_repository.py     # Health score data access
+│   └── simulation_repository.py # Simulation data access
+├── services/                   # Business orchestration & transaction layer
+│   ├── profile_service.py      # Profile CRUD business logic
 │   ├── score_service.py        # Score calculation & AI insight hooks
-│   └── simulation_service.py   # Simulation execution & AI feedback hooks
-├── api/v1/                     # REST API Endpoint Controllers
+│   ├── simulation_service.py   # Simulation execution & AI feedback hooks
+│   └── gemini_service.py       # Google Gemini AI integration service
+├── api/v1/                     # REST API endpoint controllers
 │   ├── router.py               # Version 1 API router aggregator
 │   └── endpoints/
-│       ├── health.py           # Diagnostic health check
-│       ├── profile.py          # Profile CRUD
+│       ├── health.py           # Diagnostic health checks
+│       ├── profile.py          # Profile CRUD operations
 │       ├── score.py            # Health score endpoints
-│       └── simulation.py       # Simulation endpoints
-└── integrations/               # AI Service Provider Hooks
-    ├── base_ai.py              # Abstract Base Class BaseAIProvider
-    ├── prompts.py              # Clinical prompt templates
-    └── gemini_provider.py      # Google Gemini provider implementation hook
-=======
-# 🧬 MediTwin AI — Digital Health Twin Platform
-
-> **AI-powered Digital Health Twin that simulates future health outcomes through personalized lifestyle scenarios, predictive risk analysis, and intelligent health coaching.**
-
----
-
-## 📖 Project Overview
-
-MediTwin AI is a hackathon project that reimagines how people understand and interact with their own health data.
-
-Instead of generic health advice, MediTwin AI creates a **Digital Health Twin** — a simulation of you — that can:
-
-- Explain your current health based on real metrics
-- Predict where your health is heading in 1 month, 6 months, and 1 year
-- Simulate lifestyle changes like *"What happens if I quit smoking?"* or *"What if I walk daily?"*
-- Provide prioritized, personalized recommendations
-- Answer health questions conversationally through an AI Health Coach
-
-The AI does not diagnose diseases. It explains trends, simulates outcomes, and guides users toward better health decisions.
-
----
-
-## ✨ Features
-
-| Feature | Description |
-|---|---|
-| 🏥 **Health Summary** | AI-generated explanation of your current health status and score |
-| 🔮 **Future Prediction** | Timeline-based health trajectory at 1 Month, 6 Months, and 1 Year |
-| 💡 **Recommendations Engine** | Prioritized, actionable lifestyle recommendations (High / Medium / Low impact) |
-| 🔄 **Scenario Simulator** | What-If simulation for lifestyle changes and their projected health impact |
-| 🤖 **AI Health Coach** | Conversational AI that answers health questions using your profile context |
-| 📊 **Demo Profiles** | 10 realistic profiles covering diverse health situations for testing and demos |
-
----
-
-## 🛠 Tech Stack
-
-### AI & Backend
-| Layer | Technology |
-|---|---|
-| Language | Python 3.11+ |
-| Web Framework | FastAPI |
-| ASGI Server | Uvicorn |
-| AI Model | Google Gemini (via `google-genai` SDK) |
-| Data Validation | Pydantic v2 |
-| Environment Config | python-dotenv |
-
-### API Design
-| Concept | Implementation |
-|---|---|
-| Architecture | Clean Architecture (Prompts → Schemas → Services → Routes) |
-| Response Format | Structured JSON (enforced via Pydantic + Gemini JSON mode) |
-| Versioning | `/api/v1/` prefix |
-| Documentation | Auto-generated via FastAPI `/docs` and `/redoc` |
-
----
-
-## 📁 Folder Structure
-
-```
-MediTwin-AI/
-│
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   │   └── routes/
-│   │   │       └── ai.py               # FastAPI AI route definitions
-│   │   │
-│   │   ├── prompts/
-│   │   │   ├── system_prompt.py        # Shared AI persona & rules
-│   │   │   ├── health_summary.py       # Health analysis prompt
-│   │   │   ├── future_prediction.py    # Future prediction prompt
-│   │   │   ├── recommendations.py      # Lifestyle recommendations prompt
-│   │   │   ├── scenario.py             # What-If scenario prompt
-│   │   │   └── coach.py                # Health coach chat prompt
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── ai_schemas.py           # Pydantic response models
-│   │   │   └── request_schemas.py      # Pydantic request models
-│   │   │
-│   │   ├── services/
-│   │   │   └── gemini_service.py       # Gemini API integration & business logic
-│   │   │
-│   │   └── main.py                     # FastAPI app entrypoint (CORS, routing, lifespan)
-│   │
-│   └── data/
-│       └── demo_profiles.json          # 10 realistic demo health profiles
-│
-├── .env                                # API keys (gitignored)
-├── .gitignore
-├── requirements.txt
-└── README.md
->>>>>>> origin/feature/ai-integration
-```
-
----
-
-<<<<<<< HEAD
-## ⚡ Quick Start & Setup Guide
-
-### 1. Requirements
-- Python 3.12+ installed
-- Virtual environment (`venv` or `conda`)
-
-### 2. Installation
-
-Clone repository and navigate into root:
-=======
-## ⚙️ Installation
-
-### 1. Clone the Repository
-
->>>>>>> origin/feature/ai-integration
-```bash
+│       ├── simulation.py       # Simulation endpoints
+│       └── ai.py               # AI service endpoints
+├── integrations/               # AI service provider abstractions
+│   ├── base_ai.py              # Abstract base class for AI providers
+│   ├── prompts.py              # Clinical prompt templates
+│   └── gemini_provider.py      # Google Gemini provider implementation
+└── data/
+    └── demo_profiles.json      # Sample profiles for testing
+Request Flow
+Request
+   │
+   ▼
+FastAPI Route  (app/api/endpoints/)
+   │
+   ├── Validates Request via Pydantic (app/schemas/)
+   │
+   ▼
+Service Layer  (app/services/)
+   │
+   ├── Orchestrates business logic
+   ├── Calls repositories for data access
+   ├── Invokes domain logic for calculations
+   │
+   ▼
+Domain Layer  (app/domain/)
+   │
+   ├── Pure, framework-independent calculations
+   ├── Health scoring & simulation engines
+   │
+   ▼
+Repository Layer  (app/repositories/)
+   │
+   ├── Database operations via SQLAlchemy
+   │
+   ▼
+Response validated via Pydantic  (app/schemas/)
+   │
+   ▼
+Structured JSON returned to client
+⚡ Quick Start
+Prerequisites
+Python 3.12+ — Download from python.org
+pip — Python package manager (included with Python)
+Virtual environment — venv (included) or conda
+Git — For cloning the repository
+Installation
+Step 1: Clone the Repository
+bash
 git clone https://github.com/lakshya0101/MediTwin-AI.git
 cd MediTwin-AI
-```
+Step 2: Create and Activate Virtual Environment
 
-<<<<<<< HEAD
-Create and activate virtual environment:
-```bash
-python -m venv .venv
-# On Windows PowerShell:
-.\.venv\Scripts\Activate.ps1
-# On Linux/macOS:
-source .venv/bin/activate
-```
+On macOS/Linux:
 
-Install dependencies:
-=======
-### 2. Create a Virtual Environment
-
-```bash
+bash
 python3 -m venv venv
-source venv/bin/activate       # macOS / Linux
-venv\Scripts\activate          # Windows
-```
+source venv/bin/activate
 
-### 3. Install Dependencies
+On Windows (PowerShell):
 
->>>>>>> origin/feature/ai-integration
-```bash
+bash
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+On Windows (Command Prompt):
+
+bash
+python -m venv venv
+venv\Scripts\activate
+Step 3: Install Dependencies
+bash
 pip install -r requirements.txt
-```
 
-<<<<<<< HEAD
-### 3. Environment Setup
+Verify installation:
 
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
+bash
+python -c "import fastapi; print(f'FastAPI {fastapi.__version__} installed')"
+Step 4: Configure Environment Variables
 
-Default `.env` configuration:
-```env
+Create a .env file in the project root directory:
+
+bash
+# macOS/Linux
+touch .env
+
+# Windows
+type nul > .env
+
+Add the following configuration to .env:
+
+env
+# ========== Application Settings ==========
 APP_NAME="MediTwin AI Backend"
 APP_ENV=development
 DEBUG=true
 API_V1_STR=/api/v1
+
+# ========== Database Configuration ==========
+# SQLite (Development)
 DATABASE_URL=sqlite+aiosqlite:///./meditwin.db
-CORS_ORIGINS=["http://localhost:3000","http://localhost:5173"]
+
+# PostgreSQL (Production - uncomment to use)
+# DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/meditwin
+
+# ========== CORS Configuration ==========
+CORS_ORIGINS=["http://localhost:3000","http://localhost:5173","http://localhost:8080"]
+
+# ========== Logging ==========
 LOG_LEVEL=INFO
-```
 
----
+# ========== Google Gemini AI Integration ==========
+GEMINI_API_KEY=your_gemini_api_key_here
 
-## 🚀 Running the Application
+Important Notes:
 
-Launch the ASGI Uvicorn development server:
+Never commit the .env file to version control — it's already in .gitignore
+Obtain your Gemini API key from Google AI Studio
+For production, use PostgreSQL instead of SQLite
+🚀 Running the Application
+Development Server
 
-```bash
+Start the development server with hot-reload:
+
+bash
 uvicorn app.main:app --reload
-```
+Production Server
 
-Server endpoints:
-- **API Base URL**: `http://127.0.0.1:8000`
-- **Swagger OpenAPI Docs**: `http://127.0.0.1:8000/docs`
-- **ReDoc Interactive Docs**: `http://127.0.0.1:8000/redoc`
-- **System Health Check**: `http://127.0.0.1:8000/api/v1/health`
+Start the production server:
 
----
+bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+Access Points
 
-## 🧪 Running Tests
+Once the server is running, access:
 
-Execute full test suite with `pytest`:
+URL	Purpose
+http://127.0.0.1:8000	API Base URL
+http://127.0.0.1:8000/docs	Interactive Swagger OpenAPI Docs
+http://127.0.0.1:8000/redoc	ReDoc Interactive API Documentation
+http://127.0.0.1:8000/api/v1/health	System health check endpoint
+🧪 Running Tests
+Run All Tests
 
-```bash
+Execute the full test suite:
+
+bash
 pytest
-```
-
-Running specific test suites:
-```bash
-# Domain health engine tests
+Run Specific Test Modules
+bash
+# Domain logic & health engine tests
 pytest tests/test_health_engine.py
 
-# API Integration tests
+# API integration tests
 pytest tests/test_profile_api.py tests/test_score_api.py tests/test_simulation_api.py
-```
 
----
+# With verbose output
+pytest -v
 
-## 🌐 API Overview & Endpoints
+# With coverage report
+pytest --cov=app --cov-report=html
+View Coverage Report
+bash
+# Generate HTML coverage report
+pytest --cov=app --cov-report=html
 
-All success API responses return a standardized JSON structure:
+# Open coverage report in browser (after generation)
+open htmlcov/index.html  # macOS
+# or
+start htmlcov/index.html # Windows
+📡 API Endpoints
 
-```json
+All API responses follow a standardized JSON structure:
+
+Success Response:
+
+json
 {
   "success": true,
   "data": { ... },
   "message": "Operation completed successfully."
 }
-```
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/v1/health` | System health check, DB ping, uptime & version |
-| `POST` | `/api/v1/profile` | Create patient health profile |
-| `GET` | `/api/v1/profile/{id}` | Get patient profile by ID |
-| `PUT` | `/api/v1/profile/{id}` | Update patient profile metrics |
-| `DELETE` | `/api/v1/profile/{id}` | Delete profile and associated data |
-| `POST` | `/api/v1/score/calculate/{profile_id}` | Compute & store health score assessment |
-| `GET` | `/api/v1/score/{profile_id}` | Fetch latest health score |
-| `POST` | `/api/v1/simulation/{profile_id}` | Run & store digital twin scenario simulation |
-| `GET` | `/api/v1/simulation/{simulation_id}` | Fetch simulation projection result |
+Error Response:
 
----
+json
+{
+  "success": false,
+  "error": "Error description",
+  "message": "Additional context"
+}
+Core Backend Endpoints
+Health & Status
+Method	Endpoint	Description
+GET	/api/v1/health	System health check, DB connectivity, uptime & API version
+Profile Management
+Method	Endpoint	Description
+POST	/api/v1/profile	Create a new patient health profile
+GET	/api/v1/profile/{id}	Retrieve patient profile by ID
+PUT	/api/v1/profile/{id}	Update patient profile metrics and biomarkers
+DELETE	/api/v1/profile/{id}	Delete profile and all associated data
+Health Scoring
+Method	Endpoint	Description
+POST	/api/v1/score/calculate/{profile_id}	Compute and store comprehensive health score assessment
+GET	/api/v1/score/{profile_id}	Fetch the latest computed health score
+Simulations
+Method	Endpoint	Description
+POST	/api/v1/simulation/{profile_id}	Run and store a digital twin scenario simulation
+GET	/api/v1/simulation/{simulation_id}	Retrieve simulation projection results
+AI Service Endpoints
 
-## 📑 Additional Documentation
+All AI endpoints are prefixed with /api/v1/ai. These endpoints leverage Google Gemini to generate personalized health insights and guidance.
 
-- [Frontend Integration Guide](FRONTEND_INTEGRATION.md): Detailed API contracts, TypeScript interfaces, and sample JSON payloads for frontend integration.
-- [AI Integration Guide](AI_INTEGRATION.md): Complete architectural breakdown and hook specifications for connecting Google Gemini LLMs.
-- [Postman Collection](MediTwin.postman_collection.json): Importable Postman v2.1 collection.
-=======
----
+Health Summary
 
-## 🔐 Environment Variables
+Endpoint: POST /api/v1/ai/health-summary
 
-Create a `.env` file in the root directory:
+Returns a structured AI-generated explanation of the user's current health status, score, and key observations.
 
-```bash
-touch .env
-```
+Request Body:
 
-Add the following:
+json
+{
+  "health_data": {
+    "profile": {
+      "age": 30,
+      "weight_kg": 70,
+      "activity_level": "Sedentary"
+    },
+    "health_score": 72,
+    "risk_level": "Moderate",
+    "bmi": 25.0,
+    "sleep_score": 65,
+    "activity_score": 40
+  }
+}
 
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-```
+Response Example:
 
-> **Note:** Never commit your `.env` file. It is already listed in `.gitignore`.
-> Obtain your API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+json
+{
+  "success": true,
+  "data": {
+    "summary": "Your health score of 72 indicates moderate overall health...",
+    "key_observations": ["BMI is in healthy range", "Sleep patterns need improvement"],
+    "disclaimer": "MediTwin AI is a simulation tool, not medical advice."
+  }
+}
+Future Health Prediction
 
----
+Endpoint: POST /api/v1/ai/future-prediction
 
-## 🚀 Running the Backend
+Projects health trajectory across multiple timeframes: Today → 1 Month → 6 Months → 1 Year.
 
-```bash
-uvicorn backend.app.main:app --reload
-```
+Request Body:
 
-The server will start at:
-
-```
-http://127.0.0.1:8000
-```
-
-| URL | Description |
-|---|---|
-| `http://127.0.0.1:8000/docs` | Interactive Swagger UI |
-| `http://127.0.0.1:8000/redoc` | ReDoc API documentation |
-| `http://127.0.0.1:8000/health` | Server health check |
-
----
-
-## 🔗 API Endpoints
-
-All AI endpoints are prefixed with `/api/v1/ai`.
-
-### `POST /api/v1/ai/health-summary`
-Returns a structured AI explanation of the user's current health status, score, and key observations.
-
-**Request Body:**
-```json
+json
 {
   "health_data": {
     "profile": { "age": 30, "weight_kg": 70, "activity_level": "Sedentary" },
@@ -350,148 +324,279 @@ Returns a structured AI explanation of the user's current health status, score, 
     "activity_score": 40
   }
 }
-```
+Lifestyle Recommendations
 
----
+Endpoint: POST /api/v1/ai/recommendations
 
-### `POST /api/v1/ai/future-prediction`
-Projects health trajectory across **Today → 1 Month → 6 Months → 1 Year**.
+Returns prioritized lifestyle recommendations with impact severity ratings (High / Medium / Low).
 
-**Request Body:** Same as `/health-summary`
+Request Body: Same structure as /health-summary
 
----
+Response Example:
 
-### `POST /api/v1/ai/recommendations`
-Returns prioritized lifestyle recommendations with qualitative impact ratings (High / Medium / Low).
-
-**Request Body:** Same as `/health-summary`
-
----
-
-### `POST /api/v1/ai/scenario`
-Simulates a What-If lifestyle change and explains its projected health impact.
-
-**Request Body:**
-```json
+json
 {
-  "health_data": { "..." },
+  "success": true,
+  "data": {
+    "recommendations": [
+      {
+        "recommendation": "Increase daily steps to 8,000+",
+        "impact": "High",
+        "timeframe": "2-4 weeks"
+      },
+      {
+        "recommendation": "Establish consistent sleep schedule",
+        "impact": "High",
+        "timeframe": "1-2 weeks"
+      }
+    ]
+  }
+}
+Scenario Simulation (What-If Analysis)
+
+Endpoint: POST /api/v1/ai/scenario
+
+Simulates a "What-If" lifestyle change and explains its projected health impact.
+
+Request Body:
+
+json
+{
+  "health_data": {
+    "profile": { "age": 30, "weight_kg": 70, "activity_level": "Sedentary" },
+    "health_score": 72,
+    "risk_level": "Moderate",
+    "bmi": 25.0,
+    "sleep_score": 65,
+    "activity_score": 40
+  },
   "scenario": "Start walking 7000 steps daily"
 }
-```
 
-**Supported scenarios (examples):**
-- Walk daily
-- Quit smoking
-- Sleep 8 hours
-- Lose 5 kg / Gain 5 kg
-- Stop exercising
-- Increase water intake
+Supported Scenarios:
 
----
+"Start walking 7000 steps daily"
+"Increase daily steps to 10000"
+"Quit smoking"
+"Sleep 8 hours consistently"
+"Lose 5 kg"
+"Gain 5 kg"
+"Stop exercising"
+"Increase water intake to 3L daily"
+Health Coach (Conversational AI)
 
-### `POST /api/v1/ai/coach`
-Conversational AI Health Coach that answers questions using the user's profile and chat history.
+Endpoint: POST /api/v1/ai/coach
 
-**Request Body:**
-```json
+Conversational AI health coach that answers health-related questions using the user's profile data and chat history for context-aware responses.
+
+Request Body:
+
+json
 {
-  "health_data": { "..." },
+  "health_data": {
+    "profile": { "age": 30, "weight_kg": 70, "activity_level": "Sedentary" },
+    "health_score": 72,
+    "risk_level": "Moderate",
+    "bmi": 25.0,
+    "sleep_score": 65,
+    "activity_score": 40
+  },
   "question": "Why is my health score low?",
   "history": [
-    { "role": "user", "content": "How can I improve my sleep?" },
-    { "role": "assistant", "content": "..." }
+    {
+      "role": "user",
+      "content": "How can I improve my sleep?"
+    },
+    {
+      "role": "assistant",
+      "content": "Consider establishing a consistent sleep schedule and limiting screen time before bed."
+    }
   ]
 }
-```
 
-> `history` is optional. Pass previous messages to maintain conversational context.
+Notes:
 
----
+The history field is optional — omit it for the first message
+Pass previous conversation turns to maintain context across messages
+The coach uses your profile data to provide personalized guidance
+👥 Demo Profiles
 
-## 👥 Demo Profiles
+Ten realistic demo profiles are available in app/data/demo_profiles.json for testing, presentations, and API validation. Each profile includes complete health metrics:
 
-10 realistic demo profiles are available in `backend/data/demo_profiles.json` for testing, presentations, and debugging.
+#	Name	Profile Type	Health Score	Risk Level
+1	Alex	Healthy Athlete	94	Very Low
+2	Sarah	Sedentary Office Worker	68	Moderate
+3	David	Stressed Executive	45	High
+4	Maria	Managing Type 2 Diabetes	72	Moderate
+5	James	Recovering Smoker	65	Moderate
+6	Emma	College Student (Irregular Habits)	78	Low
+7	Robert	Active Senior	82	Low
+8	Olivia	Postpartum Mother	75	Low
+9	Daniel	Marathon Runner	98	Very Low
+10	Sophia	Night Shift Worker	38	High
 
-| # | Name | Condition | Health Score | Risk Level |
-|---|---|---|---|---|
-| 1 | Alex | Healthy Athlete | 94 | Very Low |
-| 2 | Sarah | Sedentary Office Worker | 68 | Moderate |
-| 3 | David | Stressed Executive | 45 | High |
-| 4 | Maria | Managing Type 2 Diabetes | 72 | Moderate |
-| 5 | James | Recovering Smoker | 65 | Moderate |
-| 6 | Emma | College Student (Irregular Habits) | 78 | Low |
-| 7 | Robert | Active Senior | 82 | Low |
-| 8 | Olivia | Postpartum Mother | 75 | Low |
-| 9 | Daniel | Marathon Runner | 98 | Very Low |
-| 10 | Sophia | Night Shift Worker | 38 | High |
+Load demo profiles for testing:
 
----
+python
+import json
+with open('app/data/demo_profiles.json') as f:
+    profiles = json.load(f)
+🔑 Key Design Principles
+1. AI Never Calculates Scores
 
-## 🏗 Project Architecture
+All health metrics (Health Score, BMI, Risk Level, Sleep Score, Activity Score) are computed by the backend domain layer using deterministic algorithms. Gemini AI only explains and contextualizes these values — it never generates raw scores.
 
-```
-Request
-   │
-   ▼
-FastAPI Route  (backend/app/api/routes/ai.py)
-   │
-   ├── Validates Request via Pydantic (request_schemas.py)
-   │
-   ▼
-Gemini Service  (backend/app/services/gemini_service.py)
-   │
-   ├── Loads Prompt Template  (backend/app/prompts/*.py)
-   │   └── Every prompt imports shared SYSTEM_PROMPT
-   │
-   ├── Calls Gemini API (google-genai SDK)
-   │   └── Enforces structured JSON output via Pydantic schema
-   │
-   ▼
-Response validated via Pydantic  (backend/app/schemas/ai_schemas.py)
-   │
-   ▼
-Structured JSON returned to client
-```
+2. Separation of Concerns
+Domain Layer: Pure business logic, framework-independent
+Services Layer: Business orchestration and transactions
+Repository Layer: Data access abstractions
+API Layer: Request/response handling
+Prompts: Fully isolated in dedicated template files for easy tuning
+3. Comprehensive Disclaimers
 
-### Key Design Decisions
+Every AI-generated response includes a disclaimer that MediTwin AI is an educational simulator, not a medical diagnostic or treatment tool.
 
-- **AI never calculates scores.** Health Score, BMI, Risk Level, Sleep Score, and Activity Score are all computed by the backend. Gemini only **explains** these values.
-- **Prompts are fully separated** from business logic to allow easy tuning.
-- **Every response includes a disclaimer** — MediTwin AI is a simulator, not a medical tool.
+4. Deterministic Clinical Scoring
 
----
+All health calculations follow:
 
-## 🔭 Future Improvements
+WHO (World Health Organization) guidelines
+AHA (American Heart Association) standards
+ADA (American Diabetes Association) recommendations
+5. Async-First Architecture
 
-- [ ] Add FastAPI middleware for request logging and rate limiting
-- [ ] Add authentication with JWT tokens
-- [ ] Connect to Lakshya's health scoring backend (FastAPI + health engine)
-- [ ] Integrate real wearable data (Apple Health, Fitbit)
-- [ ] Stream AI responses using Server-Sent Events (SSE)
-- [ ] Add multilingual prompt support
-- [ ] Switch to numerical impact scores once backend provides them
+Built with SQLAlchemy async ORM and FastAPI for high-concurrency, non-blocking I/O operations suitable for production deployments.
 
----
+📚 Additional Documentation
+Frontend Integration Guide — Complete API contracts, TypeScript type definitions, and sample JSON payloads for frontend developers
+AI Integration Guide — Detailed architectural breakdown, prompt specifications, and hook system documentation for LLM integration
+Postman Collection — Ready-to-import Postman v2.1 collection with all endpoints pre-configured
+🔧 Environment Setup for Different Scenarios
+Local Development
+env
+APP_ENV=development
+DEBUG=true
+DATABASE_URL=sqlite+aiosqlite:///./meditwin.db
+LOG_LEVEL=DEBUG
+Testing
+env
+APP_ENV=testing
+DEBUG=true
+DATABASE_URL=sqlite+aiosqlite:///:memory:
+LOG_LEVEL=DEBUG
+Production
+env
+APP_ENV=production
+DEBUG=false
+DATABASE_URL=postgresql+asyncpg://user:password@prod-db:5432/meditwin
+LOG_LEVEL=INFO
+CORS_ORIGINS=["https://yourdomain.com"]
+🔮 Future Enhancements
+ Authentication & Authorization — JWT tokens, role-based access control (RBAC)
+ Advanced Logging — Request/response logging middleware, audit trails
+ Rate Limiting — Per-endpoint and per-user rate limits to prevent abuse
+ Wearable Integration — Connect to Apple Health, Fitbit, Garmin, and Oura Ring APIs
+ Real-Time Streaming — Server-Sent Events (SSE) for live AI response streaming
+ Multilingual Support — Prompt templates and responses in multiple languages
+ Caching Layer — Redis caching for frequent queries and score calculations
+ PostgreSQL Support — Production-grade database migration guides
+ Admin Dashboard — Web-based interface for profile management and monitoring
+ Mobile SDK — Native Swift and Kotlin SDKs for iOS and Android apps
+ Analytics — User engagement metrics and health trend analysis
+ Export Features — PDF health reports, CSV data export
+🐛 Troubleshooting
+Port Already in Use
+bash
+# Find process using port 8000
+lsof -i :8000
 
-## ⚠️ Disclaimer
+# Kill the process (macOS/Linux)
+kill -9 <PID>
 
-> MediTwin AI is a **simulation tool** built for educational purposes.
->
-> It does **not** diagnose diseases, guarantee medical outcomes, or replace professional medical advice.
->
-> Always consult a qualified healthcare provider for medical decisions.
+# Use different port
+uvicorn app.main:app --port 8001
+Database Issues
+bash
+# Remove SQLite database and recreate
+rm meditwin.db
 
----
+# Restart server (creates fresh schema)
+uvicorn app.main:app --reload
+Virtual Environment Issues
+bash
+# Deactivate and reactivate
+deactivate
+source venv/bin/activate  # macOS/Linux
+# or
+venv\Scripts\activate  # Windows
+Missing Dependencies
+bash
+# Reinstall all dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+⚠️ Disclaimer
 
-## 👨‍💻 Built By
+IMPORTANT: MediTwin AI is a simulation and educational tool.
 
-| Role | Contributor |
-|---|---|
-| AI Integration, Prompt Engineering, FastAPI AI APIs, Health Coach, Future Prediction, Scenario Engine, Recommendations, Backend Integration, Deployment | **Aditya** |
-| Frontend (Landing Page, Dashboard, Charts, What-If Simulator UI, AI Chat Interface) | **Vishesh** |
-| Backend (FastAPI), Health Engine, Scenario Engine, API Design, Architecture, Code Review | **Lakshya** |
+It does NOT:
 
----
+Diagnose diseases or medical conditions
+Treat or cure any medical condition
+Guarantee medical outcomes or predictions
+Replace professional medical advice
+Substitute for consultation with healthcare providers
 
-*Built with ❤️ for a hackathon. 🚀*
->>>>>>> origin/feature/ai-integration
+ALWAYS consult a qualified healthcare provider (MD, DO, RN, or specialist) before making any medical decisions or lifestyle changes based on this tool's output.
+
+Users are responsible for verifying all information independently.
+
+🤝 Contributing
+
+We welcome contributions! To contribute:
+
+Fork the repository
+Create a feature branch (git checkout -b feature/amazing-feature)
+Commit your changes (git commit -m 'Add amazing feature')
+Push to the branch (git push origin feature/amazing-feature)
+Open a Pull Request
+
+Please ensure:
+
+All tests pass (pytest)
+Code follows PEP 8 style guide
+Docstrings are included for all functions
+👨‍💻 Development Team
+Role	Contributor	Responsibilities
+Backend Architect	Lakshya	FastAPI architecture, health scoring engine, simulation engine, API design, code review, database optimization
+Frontend Developer	Vishesh	Landing page, interactive dashboard, health charts, what-if simulator UI, AI chat interface, responsive design
+AI Engineer	Aditya	Prompt engineering, Google Gemini integration, health coach development, future predictions, scenario analysis, LLM optimization
+📄 License
+
+This project is licensed under the MIT License — see LICENSE file for complete details.
+
+MIT License Summary
+
+You are free to:
+
+✅ Use commercially
+✅ Modify the source code
+✅ Distribute copies
+✅ Use privately
+
+You must:
+
+ℹ️ Include the license and copyright notice
+📧 Support & Feedback
+Report Bugs: GitHub Issues
+Feature Requests: GitHub Discussions
+Documentation: See docs/ directory
+🙏 Acknowledgments
+
+Built with modern Python technologies:
+
+FastAPI — Modern async web framework
+SQLAlchemy — Powerful ORM for databases
+Pydantic — Data validation and settings management
+Google Generative AI — Gemini LLM integration
+
+Built with ❤️ for the hackathon. Advancing digital health innovation. 🚀
