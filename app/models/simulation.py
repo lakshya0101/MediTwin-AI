@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Dict
-from sqlalchemy import JSON, DateTime, ForeignKey, Integer, func
+from sqlalchemy import JSON, DateTime, ForeignKey, Index, Integer, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -22,8 +22,12 @@ class Simulation(Base):
     projected_score: Mapped[Dict[str, Any]] = mapped_column(JSON, nullable=False)
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), nullable=False
+        DateTime(timezone=True), server_default=func.now(), nullable=False, index=True
     )
 
     # Relationships
     profile: Mapped["Profile"] = relationship("Profile", back_populates="simulations")
+
+    __table_args__ = (
+        Index("idx_simulations_profile_created", "profile_id", "created_at"),
+    )

@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class ProfileBase(BaseModel):
-    """Base Pydantic model for Profile attributes."""
+    """Base Pydantic model for Profile attributes with rigorous clinical validation."""
     full_name: str = Field(..., min_length=1, max_length=255, json_schema_extra={"example": "John Doe"})
     age: int = Field(..., ge=1, le=120, json_schema_extra={"example": 35})
     biological_sex: str = Field(..., json_schema_extra={"example": "male"}, description="male, female, or other")
@@ -22,6 +22,30 @@ class ProfileBase(BaseModel):
     smoking_status: str = Field(..., json_schema_extra={"example": "never"}, description="never, former, or current")
     alcohol_drinks_per_week: int = Field(..., ge=0, le=100, json_schema_extra={"example": 2})
     water_intake_liters: float = Field(..., ge=0, le=20, json_schema_extra={"example": 2.5})
+
+    @field_validator("biological_sex")
+    @classmethod
+    def validate_biological_sex(cls, v: str) -> str:
+        v_clean = v.strip().lower()
+        if v_clean not in {"male", "female", "other"}:
+            raise ValueError("biological_sex must be one of: 'male', 'female', 'other'")
+        return v_clean
+
+    @field_validator("smoking_status")
+    @classmethod
+    def validate_smoking_status(cls, v: str) -> str:
+        v_clean = v.strip().lower()
+        if v_clean not in {"never", "former", "current"}:
+            raise ValueError("smoking_status must be one of: 'never', 'former', 'current'")
+        return v_clean
+
+    @model_validator(mode="after")
+    def validate_blood_pressure(self) -> "ProfileBase":
+        if self.systolic_bp <= self.diastolic_bp:
+            raise ValueError(
+                f"Systolic blood pressure ({self.systolic_bp} mmHg) must be greater than diastolic blood pressure ({self.diastolic_bp} mmHg)."
+            )
+        return self
 
 
 class ProfileCreate(ProfileBase):
@@ -48,6 +72,26 @@ class ProfileUpdate(BaseModel):
     smoking_status: Optional[str] = None
     alcohol_drinks_per_week: Optional[int] = Field(None, ge=0, le=100)
     water_intake_liters: Optional[float] = Field(None, ge=0, le=20)
+
+    @field_validator("biological_sex")
+    @classmethod
+    def validate_biological_sex(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        v_clean = v.strip().lower()
+        if v_clean not in {"male", "female", "other"}:
+            raise ValueError("biological_sex must be one of: 'male', 'female', 'other'")
+        return v_clean
+
+    @field_validator("smoking_status")
+    @classmethod
+    def validate_smoking_status(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        v_clean = v.strip().lower()
+        if v_clean not in {"never", "former", "current"}:
+            raise ValueError("smoking_status must be one of: 'never', 'former', 'current'")
+        return v_clean
 
 
 class ProfileResponse(ProfileBase):

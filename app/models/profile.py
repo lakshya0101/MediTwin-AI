@@ -1,6 +1,6 @@
 from datetime import datetime
-from typing import TYPE_CHECKING, List, Optional
-from sqlalchemy import DateTime, Float, Integer, String, func
+from typing import TYPE_CHECKING, List
+from sqlalchemy import CheckConstraint, DateTime, Float, Index, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Profile(Base):
-    """SQLAlchemy model representing a patient's digital health profile."""
+    """SQLAlchemy model representing a patient's digital health profile with database constraints."""
 
     __tablename__ = "profiles"
 
@@ -35,7 +35,7 @@ class Profile(Base):
     water_intake_liters: Mapped[float] = mapped_column(Float, nullable=False)
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), nullable=False
+        DateTime(timezone=True), server_default=func.now(), nullable=False, index=True
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
@@ -47,4 +47,11 @@ class Profile(Base):
     )
     simulations: Mapped[List["Simulation"]] = relationship(
         "Simulation", back_populates="profile", cascade="all, delete-orphan", order_by="desc(Simulation.created_at)"
+    )
+
+    __table_args__ = (
+        CheckConstraint("age > 0 AND age <= 120", name="check_valid_age"),
+        CheckConstraint("systolic_bp > diastolic_bp", name="check_systolic_gt_diastolic"),
+        CheckConstraint("stress_level >= 1 AND stress_level <= 10", name="check_stress_level_range"),
+        Index("idx_profile_created", "created_at"),
     )
