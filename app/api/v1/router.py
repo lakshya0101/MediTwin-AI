@@ -1,8 +1,11 @@
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import health
+from app.api.v1.endpoints import health, profile, score, simulation
 
 api_v1_router = APIRouter()
 
-# Include feature endpoints for v1 API
+# Include endpoint routers
 api_v1_router.include_router(health.router, tags=["Health Check"])
+api_v1_router.include_router(profile.router)
+api_v1_router.include_router(score.router)
+api_v1_router.include_router(simulation.router)
