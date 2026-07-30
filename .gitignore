@@ -1,14 +1,27 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Python / Environment
+# =========================
+# Environment
+# =========================
+.env
+.env.*
+!.env.example
+
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =========================
+# Python
+# =========================
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
+
 build/
-develop-eggs/
 dist/
 downloads/
 eggs/
@@ -22,33 +35,27 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-.env
-.env.local
-.venv
-venv/
-ENV/
 
+# =========================
 # Database
+# =========================
 *.db
 *.sqlite
 *.sqlite3
 
-# IDE / Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Testing / Coverage
+# =========================
+# Testing
+# =========================
 .pytest_cache/
 .coverage
 htmlcov/
-=======
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+coverage/
 
-# dependencies
-/node_modules
-/.pnp
+# =========================
+# Node / Next.js
+# =========================
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -56,48 +63,39 @@ htmlcov/
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+.next/
+out/
 
-# next.js
-/.next/
-/out/
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# =========================
+# Logs
+# =========================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
+# =========================
+# Vercel
+# =========================
 .vercel
 
-# typescript
+# =========================
+# TypeScript
+# =========================
 *.tsbuildinfo
 next-env.d.ts
->>>>>>> origin/feature/frontend
-=======
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
->>>>>>> origin/feature/ai-integration
+# =========================
+# Misc
+# =========================
+.DS_Store
+Thumbs.db
+*.pem
