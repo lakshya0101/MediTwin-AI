@@ -1,0 +1,212 @@
+[
+  {
+    "id": "demo-001",
+    "name": "Alex (Healthy Athlete)",
+    "profile": {
+      "age": 28,
+      "gender": "Male",
+      "weight_kg": 75,
+      "height_cm": 182,
+      "smoking_status": "Never",
+      "activity_level": "Very Active",
+      "diet_quality": "Excellent",
+      "blood_pressure": "115/75",
+      "heart_rate_resting": 55,
+      "chronic_conditions": []
+    },
+    "health_score": 94,
+    "risk_level": "Very Low",
+    "bmi": 22.6,
+    "sleep_score": 88,
+    "activity_score": 95
+  },
+  {
+    "id": "demo-002",
+    "name": "Sarah (Sedentary Office Worker)",
+    "profile": {
+      "age": 35,
+      "gender": "Female",
+      "weight_kg": 68,
+      "height_cm": 165,
+      "smoking_status": "Never",
+      "activity_level": "Sedentary",
+      "diet_quality": "Fair",
+      "blood_pressure": "125/82",
+      "heart_rate_resting": 72,
+      "chronic_conditions": []
+    },
+    "health_score": 68,
+    "risk_level": "Moderate",
+    "bmi": 25.0,
+    "sleep_score": 65,
+    "activity_score": 40
+  },
+  {
+    "id": "demo-003",
+    "name": "David (Stressed Executive)",
+    "profile": {
+      "age": 45,
+      "gender": "Male",
+      "weight_kg": 92,
+      "height_cm": 178,
+      "smoking_status": "Former",
+      "activity_level": "Light",
+      "diet_quality": "Poor",
+      "blood_pressure": "145/95",
+      "heart_rate_resting": 85,
+      "chronic_conditions": ["Hypertension", "High Cholesterol"]
+    },
+    "health_score": 45,
+    "risk_level": "High",
+    "bmi": 29.0,
+    "sleep_score": 45,
+    "activity_score": 35
+  },
+  {
+    "id": "demo-004",
+    "name": "Maria (Managing Diabetes)",
+    "profile": {
+      "age": 52,
+      "gender": "Female",
+      "weight_kg": 80,
+      "height_cm": 160,
+      "smoking_status": "Never",
+      "activity_level": "Moderate",
+      "diet_quality": "Good",
+      "blood_pressure": "130/85",
+      "heart_rate_resting": 70,
+      "chronic_conditions": ["Type 2 Diabetes"]
+    },
+    "health_score": 72,
+    "risk_level": "Moderate",
+    "bmi": 31.2,
+    "sleep_score": 70,
+    "activity_score": 60
+  },
+  {
+    "id": "demo-005",
+    "name": "James (Recovering Smoker)",
+    "profile": {
+      "age": 38,
+      "gender": "Male",
+      "weight_kg": 85,
+      "height_cm": 180,
+      "smoking_status": "Quit recently (3 months ago)",
+      "activity_level": "Moderate",
+      "diet_quality": "Good",
+      "blood_pressure": "128/84",
+      "heart_rate_resting": 78,
+      "chronic_conditions": []
+    },
+    "health_score": 65,
+    "risk_level": "Moderate",
+    "bmi": 26.2,
+    "sleep_score": 60,
+    "activity_score": 55
+  },
+  {
+    "id": "demo-006",
+    "name": "Emma (College Student, Irregular Habits)",
+    "profile": {
+      "age": 20,
+      "gender": "Female",
+      "weight_kg": 60,
+      "height_cm": 168,
+      "smoking_status": "Vapes occasionally",
+      "activity_level": "Light",
+      "diet_quality": "Poor",
+      "blood_pressure": "110/70",
+      "heart_rate_resting": 68,
+      "chronic_conditions": []
+    },
+    "health_score": 78,
+    "risk_level": "Low",
+    "bmi": 21.3,
+    "sleep_score": 40,
+    "activity_score": 50
+  },
+  {
+    "id": "demo-007",
+    "name": "Robert (Active Senior)",
+    "profile": {
+      "age": 68,
+      "gender": "Male",
+      "weight_kg": 72,
+      "height_cm": 175,
+      "smoking_status": "Never",
+      "activity_level": "Active",
+      "diet_quality": "Excellent",
+      "blood_pressure": "130/80",
+      "heart_rate_resting": 62,
+      "chronic_conditions": ["Mild Osteoarthritis"]
+    },
+    "health_score": 82,
+    "risk_level": "Low",
+    "bmi": 23.5,
+    "sleep_score": 75,
+    "activity_score": 80
+  },
+  {
+    "id": "demo-008",
+    "name": "Olivia (Postpartum Mother)",
+    "profile": {
+      "age": 31,
+      "gender": "Female",
+      "weight_kg": 75,
+      "height_cm": 162,
+      "smoking_status": "Never",
+      "activity_level": "Light",
+      "diet_quality": "Good",
+      "blood_pressure": "118/76",
+      "heart_rate_resting": 75,
+      "chronic_conditions": []
+    },
+    "health_score": 75,
+    "risk_level": "Low",
+    "bmi": 28.6,
+    "sleep_score": 50,
+    "activity_score": 45
+  },
+  {
+    "id": "demo-009",
+    "name": "Daniel (Marathon Runner)",
+    "profile": {
+      "age": 33,
+      "gender": "Male",
+      "weight_kg": 65,
+      "height_cm": 178,
+      "smoking_status": "Never",
+      "activity_level": "Extreme",
+      "diet_quality": "Excellent",
+      "blood_pressure": "105/65",
+      "heart_rate_resting": 45,
+      "chronic_conditions": []
+    },
+    "health_score": 98,
+    "risk_level": "Very Low",
+    "bmi": 20.5,
+    "sleep_score": 90,
+    "activity_score": 100
+  },
+  {
+    "id": "demo-010",
+    "name": "Sophia (Night Shift Worker)",
+    "profile": {
+      "age": 41,
+      "gender": "Female",
+      "weight_kg": 85,
+      "height_cm": 170,
+      "smoking_status": "Current",
+      "activity_level": "Sedentary",
+      "diet_quality": "Poor",
+      "blood_pressure": "135/88",
+      "heart_rate_resting": 82,
+      "chronic_conditions": ["Pre-diabetes"]
+    },
+    "health_score": 38,
+    "risk_level": "High",
+    "bmi": 29.4,
+    "sleep_score": 35,
+    "activity_score": 20
+  }
+]
